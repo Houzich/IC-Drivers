@@ -48,9 +48,6 @@ class LIS2DW12Class
   class DataClass
   {
     public:
-//      bool event_tag[3] = {0};
-//      bool event_double_tag[3] = {0};
-//      int tap_threshold[3] = {0};
       int16_t acceleration_mg[3];
       int16_t acceleration_mg_ave[3];
       bool flag_receive;
@@ -65,11 +62,6 @@ class LIS2DW12Class
         flag_receive = false;
       }
   };
-  
-  public:      
-//    osThreadId_t ThreadID;
-//    uint64_t *pTaskStack;
-//    const osThreadAttr_t *pThreadAttr;
   
   public:
     LIS2DW12Class();          

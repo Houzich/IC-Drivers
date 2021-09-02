@@ -1,20 +1,10 @@
 /*
  ******************************************************************************
- * @file    read_data_simple.c
- * @author  Sensors Software Solution Team
- * @brief   This file show the simplest way to get data from sensor.
+ * @file    LIS2DW12.c
+ * @author  
+ * @brief   
  *
  ******************************************************************************
- * @attention
- *
- * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
- * All rights reserved.</center></h2>
- *
- * This software component is licensed by ST under BSD 3-Clause license,
- * the "License"; You may not use this file except in compliance with the
- * License. You may obtain a copy of the License at:
- *                        opensource.org/licenses/BSD-3-Clause
- *
  ******************************************************************************
  */
 
@@ -79,7 +69,6 @@ void LIS2DW12Class::Init()
       printf("LIS2DW12 Error Check device ID!!!\n");
       #endif //defined(USE_LCD)
       osDelay(1000);
-      /* manage here device not found */
     }
 
   /*
@@ -98,7 +87,6 @@ void LIS2DW12Class::Init()
   /*
    * Set full scale
    */ 
-  //lis2dw12_full_scale_set(&dev_ctx, LIS2DW12_8g);
   lis2dw12_full_scale_set(&dev_ctx, LIS2DW12_2g);
 
   /*
@@ -113,14 +101,13 @@ void LIS2DW12Class::Init()
    * Configure power mode
    */   
   lis2dw12_power_mode_set(&dev_ctx, LIS2DW12_HIGH_PERFORMANCE);
-  //lis2dw12_power_mode_set(&dev_ctx, LIS2DW12_CONT_LOW_PWR_LOW_NOISE_12bit);
 
   /*
    * Set Output Data Rate
    */
   lis2dw12_data_rate_set(&dev_ctx, LIS2DW12_XL_ODR_25Hz);
   
-  //нужно немного подождать, потому что первые значения снимает неправильные
+  //need to wait a bit, because the first values ​​remove the wrong ones
   osDelay(100);
 }
 
@@ -131,7 +118,6 @@ void LIS2DW12Class::Reset()
 
 __NO_RETURN void LIS2DW12Class::Thread (void *arg){
   while(1){
-    //printf("EXIT LIS2DW12_Thread!!!\n");
     osDelay(1000);
   }
 }
@@ -178,10 +164,7 @@ void LIS2DW12Class::Read_Data()
       Data.acceleration_mg_ave[2] = temp[2]/MOVING_AVERAGE_BUFFER_SIZE;   
       if(count_ave == MOVING_AVERAGE_BUFFER_SIZE) Data.flag_receive = true;
       if(count_ave == MOVING_AVERAGE_BUFFER_SIZE) count_ave = 0;  
-      
-     
-      //printf("Acceleration [mg]:%4.2f\t%4.2f\t%4.2f\r\n",
-      //        LIS2DW12->Data->acceleration_mg[0], LIS2DW12->Data->acceleration_mg[1], LIS2DW12->Data->acceleration_mg[2]);
+
       
 #if defined(USE_LCD)
       static LCDMsgInQueueTypeDef msg;
@@ -217,17 +200,6 @@ void LIS2DW12Class::Read_Data()
 static int32_t platform_write(void *handle, uint8_t reg, uint8_t *bufp,
                               uint16_t len)
 {
-
-//  tx_buffer[0] = reg;
-//  memcpy(&tx_buffer[1],bufp, len);
-//  SPIBRIDGEMsgQueueTypeDef msg_out;
-//  SPIBRIDGEMsgQueueTypeDef msg_in;
-//  msg_out.id = 1;
-//  msg_out.len = len + 1;
-//  msg_out.pbuff_in = rx_buffer;
-//  msg_out.pbuff_out = tx_buffer;
-//  osMessageQueuePut(LIS2DW12->Sensor->spibridge->queue_in, &msg_out, NULL, osWaitForever);
-//  osMessageQueueGet(LIS2DW12->queue_in, &msg_in, NULL, osWaitForever); 
   spi_tx_buffer[0] = reg;
   memcpy(&spi_tx_buffer[1],bufp, len);
   SPI_Transfer(spi_tx_buffer, spi_rx_buffer, len + 1, 1);
@@ -248,20 +220,6 @@ static int32_t platform_write(void *handle, uint8_t reg, uint8_t *bufp,
 static int32_t platform_read(void *handle, uint8_t reg, uint8_t *bufp,
                              uint16_t len)
 {
-//  tx_buffer[0] = reg|0x80;
-//  memset(&tx_buffer[1],0xFF, len);
-//  SPIBRIDGEMsgQueueTypeDef msg_out;
-//  SPIBRIDGEMsgQueueTypeDef msg_in;
-//  msg_out.id = 1;
-//  msg_out.len = len + 1;
-//  msg_out.pbuff_in = rx_buffer;
-//  msg_out.pbuff_out = tx_buffer;
-//  osStatus_t status;
-//  status = osMessageQueuePut(LIS2DW12->Sensor->spibridge->queue_in, &msg_out, NULL, osWaitForever);
-//  if(status != osOK)for(;;)printf("ERROR MessageQueuePut in LIS2DW12 platform_read\n");
-//  status = osMessageQueueGet(LIS2DW12->queue_in, &msg_in, NULL, osWaitForever);
-//  if(status != osOK)for(;;)printf("ERROR osMessageQueueGet in LIS2DW12 platform_read\n");
-//  memcpy(bufp,&rx_buffer[1], len);
   spi_tx_buffer[0] = reg|0x80;
   memset(&spi_tx_buffer[1],0xFF, len);
   SPI_Transfer(spi_tx_buffer, spi_rx_buffer, len + 1, 1);

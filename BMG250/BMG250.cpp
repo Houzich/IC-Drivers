@@ -1,20 +1,10 @@
 /*
  ******************************************************************************
- * @file    read_data_simple.c
+ * @file    BMG250.c
  * @author  Sensors Software Solution Team
  * @brief   This file show the simplest way to get data from sensor.
  *
  ******************************************************************************
- * @attention
- *
- * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
- * All rights reserved.</center></h2>
- *
- * This software component is licensed by ST under BSD 3-Clause license,
- * the "License"; You may not use this file except in compliance with the
- * License. You may obtain a copy of the License at:
- *                        opensource.org/licenses/BSD-3-Clause
- *
  ******************************************************************************
  */
 
@@ -116,19 +106,6 @@ void BMG250Class::delay_ms(uint32_t period_ms)
 }
 int8_t BMG250Class::spi_reg_write(uint8_t cs, uint8_t reg_addr, uint8_t *reg_data, uint16_t length)
 {
-
-    /* Implement the SPI write routine according to the target machine. */
-//    tx_buffer[0] = reg_addr;
-//    memcpy(&tx_buffer[1],reg_data, length);
-//    SPIBRIDGEMsgQueueTypeDef msg_out;
-//    SPIBRIDGEMsgQueueTypeDef msg_in;
-//    msg_out.id = 3;
-//    msg_out.len = length + 1;
-//    msg_out.pbuff_in = rx_buffer;
-//    msg_out.pbuff_out = tx_buffer;
-//    osMessageQueuePut(spi_bridge.queue_in, &msg_out, NULL, osWaitForever);
-//    osMessageQueueGet(BMG250.queue_in, &msg_in, NULL, osWaitForever);
-
     spi_tx_buffer[0] = reg_addr;
     memcpy(&spi_tx_buffer[1],reg_data, length);
     SPI_Transfer(spi_tx_buffer, spi_rx_buffer, length + 1, 3);
@@ -139,22 +116,6 @@ int8_t BMG250Class::spi_reg_write(uint8_t cs, uint8_t reg_addr, uint8_t *reg_dat
 int8_t BMG250Class::spi_reg_read(uint8_t cs, uint8_t reg_addr, uint8_t *reg_data, uint16_t length)
 {
   /* Implement the SPI read routine according to the target machine. */
-//  tx_buffer[0] = reg_addr|0x80;
-//  memset(&tx_buffer[1],0xFF, length);
-//  SPIBRIDGEMsgQueueTypeDef msg_out;
-//  SPIBRIDGEMsgQueueTypeDef msg_in;
-//  msg_out.id = 3;
-//  msg_out.len = length + 1;
-//  msg_out.pbuff_in = rx_buffer;
-//  msg_out.pbuff_out = tx_buffer;
-//  osStatus_t status;
-//  status = osMessageQueuePut(spi_bridge.queue_in, &msg_out, NULL, osWaitForever);
-//  if(status != osOK)for(;;)printf("ERROR MessageQueuePut in LIS2DW12 platform_read\n");
-//  status = osMessageQueueGet(BMG250.queue_in, &msg_in, NULL, osWaitForever);
-//  if(status != osOK)for(;;)printf("ERROR osMessageQueueGet in LIS2DW12 platform_read\n");
-//  memcpy(reg_data,&rx_buffer[1], length);
-  
-  
   spi_tx_buffer[0] = reg_addr|0x80;
   memset(&spi_tx_buffer[1],0xFF, length);
   SPI_Transfer(spi_tx_buffer, spi_rx_buffer, length + 1, 3);
