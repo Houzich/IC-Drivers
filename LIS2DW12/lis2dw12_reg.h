@@ -785,3 +785,4 @@ int32_t lis2dw12_fifo_wtm_flag_get(lis2dw12_ctx_t *ctx, uint8_t *val);
 #endif /*LIS2DW12_REGS_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

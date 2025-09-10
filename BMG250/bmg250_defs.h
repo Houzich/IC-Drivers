@@ -601,3 +601,4 @@ struct bmg250_dev
 #endif /* BMG250_DEFS_H */
 /** @}*/
 /** @}*/
+
