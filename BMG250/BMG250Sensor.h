@@ -447,3 +447,4 @@ int8_t bmg250_get_temperature(int32_t *temperature, const struct bmg250_dev *dev
 
 #endif /* BMG250_SENSOR_H */
 /** @}*/
+

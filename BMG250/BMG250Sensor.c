@@ -1963,3 +1963,4 @@ static int8_t set_spi_enable(const struct bmg250_dev *dev)
 
     return rslt;
 }
+
