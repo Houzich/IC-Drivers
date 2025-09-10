@@ -146,3 +146,4 @@ int32_t LIS2DW12_io_read( void *handle, uint8_t ReadAddr, uint8_t *pBuffer, uint
 
 
 #endif
+
