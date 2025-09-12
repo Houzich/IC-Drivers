@@ -2860,3 +2860,4 @@ int32_t lis2dw12_fifo_wtm_flag_get(lis2dw12_ctx_t *ctx, uint8_t *val)
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 
+

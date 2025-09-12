@@ -71,3 +71,4 @@ extern BMG250Class BMG250MSP;
 /* Exported functions --------------------------------------------------------*/
 #endif /*__BMG250_H*/
 
+

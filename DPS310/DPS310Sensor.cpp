@@ -1542,3 +1542,4 @@ int16_t DPS310SensorClass::readByteBitfield(uint8_t regAddress, uint8_t mask, ui
 	return (((uint8_t)ret) & mask) >> shift;
 }
 
+

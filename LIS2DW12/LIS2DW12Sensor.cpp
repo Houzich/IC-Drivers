@@ -1482,3 +1482,4 @@ int32_t LIS2DW12_io_read(void *handle, uint8_t ReadAddr, uint8_t *pBuffer, uint1
   return ((LIS2DW12Sensor *)handle)->IO_Read(pBuffer, ReadAddr, nBytesToRead);
 }
 
+

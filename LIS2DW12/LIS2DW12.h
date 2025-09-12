@@ -82,3 +82,4 @@ extern LIS2DW12Class LIS2DW12MSP;
 /* Exported functions --------------------------------------------------------*/
 #endif /*__LIS2DW12_H*/
 
+
